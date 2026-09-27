@@ -1,4 +1,4 @@
-package com.prreview.service;
+package com.prreview.config.exception;
 
 /** Thrown whenever the Claude API call fails or returns something we can't parse. */
 public class ClaudeApiException extends RuntimeException {

@@ -27,6 +27,24 @@ Claude and returns a structured review. No GitHub integration yet — that's Pha
 
    The app starts on `http://localhost:8080`.
 
+## Expose the GitHub webhook with ngrok
+
+GitHub needs a public URL to deliver webhooks to your local app. With the app
+running, start an ngrok tunnel to port 8080 (the port must match `server.port`,
+otherwise ngrok returns 502 Bad Gateway):
+
+```bash
+ngrok http 8080 --url https://cabbie-snowiness-unviable.ngrok-free.dev
+```
+
+Then in the GitHub repo go to **Settings → Webhooks** and set:
+
+- **Payload URL:** `https://cabbie-snowiness-unviable.ngrok-free.dev/webhook/github`
+- **Content type:** `application/json`
+- **Events:** select **Pull requests**
+
+Webhook deliveries can be inspected locally at `http://127.0.0.1:4040`.
+
 ## Try it
 
 Send a diff for review:

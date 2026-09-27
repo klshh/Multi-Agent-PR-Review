@@ -2,6 +2,8 @@ package com.prreview.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.prreview.config.exception.ClaudeApiException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -25,6 +27,7 @@ import java.util.Map;
  */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ClaudeClient {
 
     private final RestTemplate restTemplate;
@@ -44,11 +47,6 @@ public class ClaudeClient {
 
     @Value("${claude.api.max-tokens}")
     private int maxTokens;
-
-    public ClaudeClient(RestTemplate restTemplate, ObjectMapper objectMapper) {
-        this.restTemplate = restTemplate;
-        this.objectMapper = objectMapper;
-    }
 
     /**
      * Sends one message to Claude with the given system prompt and returns
